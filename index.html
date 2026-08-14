@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>What Do You Actually Want From a Dentist? | Reflections Dental Group</title>
+<meta name="description" content="A free 60-second quiz from Reflections Dental in Calgary. Find out what you actually value in dental care, what to look for so you get it, and claim a free 15-minute visit to meet Dr. Mehta.">
+<style>
+  :root {
+    --orange: #F26522;
+    --orange-dark: #d9550f;
+    --deep-blue: #1F4E96;
+    --accent-blue: #2E7BC4;
+    --navy: #1A2233;
+    --bg: #FFFFFF;
+    --soft: #F4F7FB;
+    --border: #E1E8F0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background: var(--soft);
+    color: var(--navy);
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  header.site {
+    background: var(--bg);
+    border-bottom: 3px solid var(--orange);
+    padding: 14px 20px;
+    text-align: center;
+  }
+  header.site .wordmark {
+    color: var(--deep-blue);
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+  header.site .wordmark .spark { color: var(--orange); }
+  header.site .sub {
+    color: var(--accent-blue);
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.28em;
+  }
+  .wrap { max-width: 680px; margin: 0 auto; padding: 24px 16px 64px; }
+  .card {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    box-shadow: 0 4px 20px rgba(31, 78, 150, 0.07);
+  }
+  .progress-track {
+    height: 8px; background: var(--border); border-radius: 4px;
+    margin-bottom: 24px; overflow: hidden; display: none;
+  }
+  .progress-fill {
+    height: 100%; width: 0; background: var(--orange);
+    border-radius: 4px; transition: width 0.3s ease;
+  }
+  h1 { color: var(--deep-blue); font-size: 1.7rem; line-height: 1.25; margin-bottom: 14px; }
+  h2 { color: var(--deep-blue); font-size: 1.35rem; line-height: 1.3; margin-bottom: 12px; }
+  h3 { color: var(--accent-blue); font-size: 1.05rem; margin-bottom: 10px; }
+  p { margin-bottom: 14px; }
+  .lede { font-size: 1.05rem; }
+  .btn {
+    display: inline-block;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    padding: 15px 34px;
+    font-size: 1.05rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+  .btn:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-row { margin-top: 22px; text-align: center; }
+  .option {
+    display: block; width: 100%; text-align: left;
+    background: var(--bg);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    font-size: 1rem;
+    color: var(--navy);
+    cursor: pointer;
+    transition: border-color 0.12s ease, background 0.12s ease;
+  }
+  .option:hover { border-color: var(--accent-blue); background: #F6FAFF; }
+  .option.selected { border-color: var(--orange); background: #FFF3EC; }
+  .qnum { color: var(--accent-blue); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 6px; }
+  .hint { color: #5A6B85; font-size: 0.88rem; margin-bottom: 14px; }
+  input[type="text"], input[type="email"], input[type="tel"] {
+    width: 100%;
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 1rem;
+    margin-bottom: 14px;
+    color: var(--navy);
+  }
+  input:focus { outline: none; border-color: var(--accent-blue); }
+  label.field { font-weight: 600; font-size: 0.92rem; display: block; margin-bottom: 6px; color: var(--deep-blue); }
+  .consent { display: flex; gap: 10px; align-items: flex-start; font-size: 0.88rem; color: #45536B; margin: 6px 0 4px; }
+  .consent input { margin-top: 4px; }
+  .error { color: #C0392B; font-size: 0.88rem; margin-bottom: 10px; display: none; }
+  .result-kicker {
+    display: inline-block; background: var(--deep-blue); color: #fff;
+    border-radius: 999px; padding: 6px 16px; font-size: 0.8rem;
+    font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .result-block { margin-bottom: 18px; }
+  .cta-sub { color: var(--accent-blue); font-size: 0.92rem; text-align: center; margin-top: 10px; }
+  .guide-card {
+    display: block;
+    border: 2px solid var(--accent-blue);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin: 22px 0 4px;
+    text-decoration: none;
+    color: var(--navy);
+    background: #F6FAFF;
+    transition: background 0.12s ease, border-color 0.12s ease;
+  }
+  .guide-card:hover { background: #ECF4FF; border-color: var(--deep-blue); }
+  .guide-card .gk {
+    color: var(--accent-blue); font-size: 0.72rem; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em; display: block; margin-bottom: 4px;
+  }
+  .guide-card .gt { font-weight: 700; color: var(--deep-blue); font-size: 1.02rem; display: block; }
+  .guide-card .gs { font-size: 0.88rem; color: #5A6B85; display: block; margin-top: 3px; }
+  .aspiration-line { font-style: italic; color: #45536B; border-left: 4px solid var(--orange); padding-left: 14px; margin-top: 20px; }
+  footer.fine {
+    text-align: center; font-size: 0.78rem; color: #7A8AA3; margin-top: 28px; padding: 0 12px;
+  }
+  footer.fine a { color: var(--accent-blue); }
+  .back-link { display: inline-block; margin-top: 16px; color: #7A8AA3; font-size: 0.85rem; background: none; border: none; cursor: pointer; text-decoration: underline; }
+  @media (max-width: 480px) {
+    .card { padding: 24px 18px; }
+    h1 { font-size: 1.45rem; }
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <div class="wordmark"><span class="spark">+++</span> Reflections <span style="font-weight:400">Dental Group</span></div>
+  <div class="sub">Dentist Fit</div>
+</header>
+
+<div class="wrap">
+  <div class="progress-track" id="progress"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="card" id="screen"></div>
+  <footer class="fine">
+    Reflections Dental Group · 4600 Crowchild Trail NW #505, Calgary, AB ·
+    <a href="https://reflectionsdentalgroup.com" target="_blank" rel="noopener">reflectionsdentalgroup.com</a><br>
+    This quiz is general information about choosing dental care and is not dental advice.
+  </footer>
+</div>
+
+<script>
+// CONFIG: swap these when the client provides final destinations.
+const WORKER_URL = "https://reflections-quiz-relay.jameson-84b.workers.dev/submit";
+const BOOKING_URL = "https://reflectionsdentalgroup.com/contact"; // TODO: replace with the booking link
+const PRIVACY_URL = "https://reflectionsdentalgroup.com"; // TODO: replace with the privacy policy URL
+const QUIZ_ID = "reflections-dentist-fit";
+
+const state = { step: -1, answers: {}, scores: { C: 0, U: 0, S: 0, P: 0 }, first_name: "", want: "", readiness_tag: "", multi: [] };
+
+const QUESTIONS = [
+  { id: "q1", type: "name", num: "Question 1 of 9", prompt: "First, what should we call you?" },
+  { id: "q2", type: "single", num: "Question 2 of 9", prompt: "What has you thinking about your dental care right now?", options: [
+    { label: "I'm due, or overdue, and I want to get it right this time", scores: { U: 2 } },
+    { label: "I've moved, or I'm new to the area, and need to find someone", scores: { C: 3 } },
+    { label: "Something about my last dental experience put me off", scores: { S: 2, C: 1 } },
+    { label: "Nothing urgent. I'm curious what I should expect from a dentist", scores: { S: 2 } } ] },
+  { id: "q3", type: "single", num: "Question 3 of 9", prompt: "Think about your last dental visit. What stood out?", options: [
+    { label: "A different dentist than last time, and I had to explain everything again", scores: { C: 3 } },
+    { label: "It felt rushed. In, out, next", scores: { U: 3 } },
+    { label: "I left with treatment suggested that I wasn't sure I needed", scores: { S: 3 } },
+    { label: "It was fine. Quick and convenient, which is what I wanted", scores: { P: 3 } } ] },
+  { id: "q4", type: "single", num: "Question 4 of 9", prompt: "If you could only have one of these from a dental practice, which would you pick?", options: [
+    { label: "The same dentist every visit, who knows my history", scores: { C: 4 } },
+    { label: "Enough time that I never feel hurried", scores: { U: 4 } },
+    { label: "A straight answer on what I actually need and what it costs", scores: { S: 4 } },
+    { label: "The most convenient appointment at the best price", scores: { P: 4 } } ] },
+  { id: "q5", type: "multi", max: 2, num: "Question 5 of 9", prompt: "What puts you off about dental visits?", hint: "Pick up to 2.", options: [
+    { label: "Seeing a different person each time", scores: { C: 2 } },
+    { label: "Feeling like I'm on a conveyor belt", scores: { U: 2 } },
+    { label: "Not having things explained to me", scores: { U: 1, S: 1 } },
+    { label: "Being sold treatment I'm not sure about", scores: { S: 2 } },
+    { label: "The cost, plainly", scores: { P: 2 } },
+    { label: "Waiting rooms and scheduling hassle", scores: { P: 1 } } ] },
+  { id: "q6", type: "single", num: "Question 6 of 9", prompt: "How many different dentists have you seen in the past five years?", options: [
+    { label: "One. I've stayed with the same person", scores: { C: 2 } },
+    { label: "Two or three", scores: { C: 1 } },
+    { label: "More than I can count, or I couldn't name them", scores: { C: 3 } },
+    { label: "None. It's been longer than five years", scores: { U: 1, S: 1 } } ] },
+  { id: "q7", type: "single", num: "Question 7 of 9", prompt: "When a dentist recommends treatment, what do you want?", options: [
+    { label: "To understand why, in plain language, before I agree", scores: { S: 3 } },
+    { label: "Time to think about it, without pressure", scores: { S: 2, U: 1 } },
+    { label: "The cost up front, itemised", scores: { S: 2, P: 1 } },
+    { label: "Just tell me what's necessary and let's get on with it", scores: { P: 2 } } ] },
+  { id: "q8", type: "single", num: "Question 8 of 9", prompt: "Where are you at with finding a dental practice?", options: [
+    { label: "I'm looking now and want to book", readiness: "ready-now" },
+    { label: "I'll be looking in the next few months", readiness: "considering" },
+    { label: "Just seeing what's out there", readiness: "exploring" },
+    { label: "Happy where I am, honestly. Just curious", readiness: "curious" } ] },
+  { id: "q9", type: "single", num: "Question 9 of 9", prompt: "What would make you actually not mind going to the dentist?", options: [
+    { label: "Knowing the person, and them knowing me", want: "knowing the person, and having them know you" },
+    { label: "Never feeling rushed", want: "never feeling rushed" },
+    { label: "Trusting that what I'm told is straight", want: "trusting that what you're told is straight" },
+    { label: "It being quick, easy, and predictable", want: "it being quick, easy, and predictable" },
+    { label: "Honestly, just not dreading it", want: "just not dreading it" } ] }
+];
+
+const OUTCOMES = {
+  C: { name: "The Familiar Face", slug: "familiar-face", guide: "guides/dentist-fit-familiar-face.pdf",
+    guideTitle: "How to find a dentist you can stay with",
+    headline: "{first_name}, you want a dentist who knows you.",
+    subhead: "Not a practice. A person.",
+    body: [
+      "Your answers keep coming back to continuity. You want to walk in and be recognised, and you want the person holding the mirror to already know what happened last time without you having to recite it.",
+      "That is not a small preference, and it is not sentimentality. Dentistry is one of the few kinds of care where the same eyes looking at the same mouth over years is the whole diagnostic method. A tooth that has changed slightly since your last visit is only obvious to someone who saw it last time. Continuity is not a nicety here. It is how problems get caught while they are still small.",
+      "<strong>What to look for, wherever you go:</strong> ask how many dentists work there and whether you will see the same one each visit. Ask who reads your x-rays. Ask what happens to your file if your dentist leaves. The answers tell you very quickly whether you are joining a practice or a rota.",
+      "<strong>Where we fit:</strong> Reflections is two chairs. Dr. Ashish Mehta sees a small number of people, and that is a deliberate choice about how he wants to practise. If you come here, you see him. That is not a policy, it is arithmetic."
+    ],
+    wantLine: "You said what would help is {want}. That is the easiest promise on this list for a practice this size to keep." },
+  U: { name: "The Unhurried", slug: "unhurried", guide: "guides/dentist-fit-unhurried.pdf",
+    guideTitle: "What an unhurried dental visit looks like",
+    headline: "{first_name}, you want time.",
+    subhead: "Which is the one thing a busy clinic cannot give away.",
+    body: [
+      "Your answers describe being processed. In, out, next. Nothing went wrong exactly, but nobody looked up, nothing got explained, and you left with a vague sense that you had been handled rather than treated.",
+      "Wanting an unhurried appointment is often treated as fussiness. It is not. Time is when the checking happens, when a question gets a real answer, and when a dentist notices the thing that was not the reason you came in. Appointment length is not a comfort feature. It is most of what you are actually paying for.",
+      "<strong>What to look for, wherever you go:</strong> ask how long a routine checkup and cleaning is booked for, and ask how many patients the dentist sees in a day. You will learn more from those two numbers than from any amount of website copy, including ours.",
+      "<strong>Where we fit:</strong> two chairs sets a ceiling on how many people can be seen in a day, and Dr. Mehta chose that ceiling on purpose. The appointment where you come back and say \"this still does not feel right\" is a normal part of the process here rather than a favour."
+    ],
+    wantLine: "You said what would help is {want}. Fifteen minutes is a reasonable way to test whether we actually work the way this page says we do." },
+  S: { name: "The Straight Answer", slug: "straight-answer", guide: "guides/dentist-fit-straight-answer.pdf",
+    guideTitle: "How to read a dental treatment plan",
+    headline: "{first_name}, you want to be told the truth.",
+    subhead: "Specifically, about what you need and what it costs.",
+    body: [
+      "Your answers are about trust rather than comfort. You do not mind treatment. You mind not knowing whether you needed it. Somewhere along the way you were handed a plan you could not evaluate, and you have been slightly on guard ever since.",
+      "That instinct is worth keeping. Dental treatment sits in three buckets: necessary now, sensible soon, and genuinely optional. A good conversation separates them out loud and tells you which is which. A bad one presents all three as one number.",
+      "<strong>What to look for, wherever you go:</strong> ask which category each item falls into, and ask what happens if you wait six months. A dentist who answers that comfortably is telling you the recommendation can survive scrutiny. Ask for the estimate in writing, itemised. Everyone reputable expects that question.",
+      "<strong>Where we fit:</strong> Dr. Mehta will tell you when something can wait, which is the part people remember. Your guide below is the full version of how to read any treatment plan, including one from somewhere else."
+    ],
+    wantLine: "You said what would help is {want}. Bring the most sceptical question you have." },
+  P: { name: "The Practical", slug: "practical", guide: "guides/dentist-fit-practical.pdf",
+    guideTitle: "Where your dental money actually goes",
+    headline: "{first_name}, you want it done efficiently.",
+    subhead: "So here is an honest answer rather than a pitch.",
+    body: [
+      "Your answers are clear. You want dental care that is convenient, affordable, and finished. You are not looking for a relationship with a dentist, you are looking for clean teeth and no surprises, and there is nothing wrong with that at all.",
+      "<strong>The honest part:</strong> a larger clinic with extended hours, multiple dentists, and volume pricing may genuinely be the right answer for you, and we would rather say so. We are two chairs, appointments run longer, and we are not the cheapest option in Calgary. If price and convenience are your top two, you should weigh that seriously rather than have us talk you out of it.",
+      "<strong>What is worth knowing anyway:</strong> the cheapest version of dental care is not always the least expensive over ten years, because the costs of rushed or repeated work arrive later and land as bigger treatment. That is not an argument for us specifically. It is an argument for weighing the whole decade rather than the invoice.",
+      "<strong>If you want to look anyway:</strong> the fifteen minutes is free and involves no treatment and no pressure. Plenty of people come, decide we are not their fit, and leave with a better question list for wherever they go instead. That is a fine outcome."
+    ],
+    wantLine: "You said what would help is {want}. Worth being honest that we optimise for a different thing." }
+};
+
+const el = (id) => document.getElementById(id);
+const screen = el("screen");
+
+function renderWelcome() {
+  el("progress").style.display = "none";
+  screen.innerHTML = `
+    <h1>What do you actually want from a dentist?</h1>
+    <p class="lede">Most people have never been asked. You pick a practice because it was close, or covered, or someone recommended it, and then you put up with whatever it turns out to be.</p>
+    <p class="lede">This free 60-second quiz sorts what you actually value in dental care, and tells you what to look for so you get it. Plus a short guide to keep, and a <strong>free 15-minute visit to meet Dr. Mehta</strong> if you want one.</p>
+    <div class="btn-row"><button class="btn" onclick="next()">Start the Quiz →</button></div>`;
+}
+
+function renderQuestion() {
+  const q = QUESTIONS[state.step];
+  el("progress").style.display = "block";
+  el("progressFill").style.width = ((state.step) / (QUESTIONS.length + 1) * 100) + "%";
+  state.multi = [];
+
+  if (q.type === "name") {
+    screen.innerHTML = `
+      <div class="qnum">${q.num}</div>
+      <h2>${q.prompt}</h2>
+      <input type="text" id="nameInput" placeholder="Your first name" maxlength="40" autocomplete="given-name">
+      <div class="error" id="err">Please tell us your first name.</div>
+      <div class="btn-row"><button class="btn" onclick="submitName()">Continue →</button></div>`;
+    el("nameInput").focus();
+    el("nameInput").addEventListener("keydown", (e) => { if (e.key === "Enter") submitName(); });
+    return;
+  }
+
+  let html = `<div class="qnum">${q.num}</div><h2>${q.prompt}</h2>`;
+  if (q.hint) html += `<p class="hint">${q.hint}</p>`;
+  q.options.forEach((opt, i) => {
+    html += `<button class="option" id="opt${i}" onclick="pick(${i})">${opt.label}</button>`;
+  });
+  if (q.type === "multi") html += `<div class="btn-row"><button class="btn" id="multiNext" onclick="submitMulti()" disabled>Continue →</button></div>`;
+  screen.innerHTML = html;
+}
+
+function submitName() {
+  const v = el("nameInput").value.trim();
+  if (!v) { el("err").style.display = "block"; return; }
+  state.first_name = v.charAt(0).toUpperCase() + v.slice(1);
+  next();
+}
+
+function pick(i) {
+  const q = QUESTIONS[state.step];
+  const opt = q.options[i];
+  if (q.type === "multi") {
+    const btn = el("opt" + i);
+    const idx = state.multi.indexOf(i);
+    if (idx >= 0) { state.multi.splice(idx, 1); btn.classList.remove("selected"); }
+    else if (state.multi.length < q.max) { state.multi.push(i); btn.classList.add("selected"); }
+    el("multiNext").disabled = state.multi.length === 0;
+    return;
+  }
+  if (opt.scores) for (const k in opt.scores) state.scores[k] += opt.scores[k];
+  if (opt.readiness) state.readiness_tag = opt.readiness;
+  if (opt.want) state.want = opt.want;
+  state.answers[q.id] = opt.label;
+  next();
+}
+
+function submitMulti() {
+  const q = QUESTIONS[state.step];
+  state.answers[q.id] = state.multi.map(i => q.options[i].label);
+  state.multi.forEach(i => {
+    const s = q.options[i].scores;
+    if (s) for (const k in s) state.scores[k] += s[k];
+  });
+  next();
+}
+
+function next() {
+  state.step++;
+  if (state.step < QUESTIONS.length) renderQuestion();
+  else renderLeadForm();
+}
+
+function archetype() {
+  const order = ["C", "U", "S", "P"];
+  let best = order[0];
+  order.forEach(k => { if (state.scores[k] > state.scores[best]) best = k; });
+  return best;
+}
+
+function renderLeadForm() {
+  el("progressFill").style.width = (QUESTIONS.length / (QUESTIONS.length + 1) * 100) + "%";
+  screen.innerHTML = `
+    <h2>Your result is ready.</h2>
+    <p>Enter your details to see what you value most in dental care, and the short guide that goes with it.</p>
+    <p>Everyone who takes the quiz can also claim a <strong>free 15-minute visit to meet Dr. Mehta and see the practice.</strong> No treatment, no examination, no cost. Just a look at the place and the person before you decide anything.</p>
+    <label class="field">First name</label>
+    <input type="text" id="lfName" value="${state.first_name.replace(/"/g, "&quot;")}">
+    <label class="field">Email</label>
+    <input type="email" id="lfEmail" placeholder="you@example.com" autocomplete="email">
+    <label class="field">Phone</label>
+    <input type="tel" id="lfPhone" placeholder="(587) 000-0000" autocomplete="tel">
+    <div class="consent">
+      <input type="checkbox" id="lfConsent">
+      <span>I agree to be contacted about my results by Reflections Dental Group. <a href="${PRIVACY_URL}" target="_blank" rel="noopener">Privacy policy</a></span>
+    </div>
+    <div class="error" id="err"></div>
+    <div class="btn-row"><button class="btn" id="lfBtn" onclick="submitLead()">See My Result →</button></div>`;
+}
+
+function fail(msg) { const e = el("err"); e.textContent = msg; e.style.display = "block"; }
+
+async function submitLead() {
+  const name = el("lfName").value.trim();
+  const email = el("lfEmail").value.trim();
+  const phone = el("lfPhone").value.replace(/[^0-9+]/g, "");
+  if (!name) return fail("Please enter your first name.");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return fail("Please enter a valid email address.");
+  if (phone.replace(/\D/g, "").length < 10) return fail("Please enter a valid phone number.");
+  if (!el("lfConsent").checked) return fail("Please check the consent box so we can send your results.");
+  state.first_name = name;
+  el("lfBtn").disabled = true;
+  el("lfBtn").textContent = "One moment...";
+
+  const arch = archetype();
+  const payload = {
+    quiz_id: QUIZ_ID,
+    first_name: name,
+    email: email,
+    phone: el("lfPhone").value.trim(),
+    archetype: OUTCOMES[arch].slug,
+    readiness_tag: state.readiness_tag,
+    want: state.want,
+    scores: state.scores,
+    answers: state.answers,
+    page: location.href
+  };
+  try {
+    await fetch(WORKER_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) });
+  } catch (e) { /* never block the visitor's results on a network hiccup */ }
+  renderResult(arch);
+}
+
+function tokens(str) {
+  return str.replaceAll("{first_name}", state.first_name)
+            .replaceAll("{want}", state.want || "knowing what you are getting");
+}
+
+function renderResult(arch) {
+  const o = OUTCOMES[arch];
+  el("progressFill").style.width = "100%";
+  let html = `
+    <div class="result-kicker">What you value most</div>
+    <h1>${tokens(o.headline)}</h1>
+    <h3>${tokens(o.subhead)}</h3>`;
+  o.body.forEach(p => { html += `<p class="result-block">${tokens(p)}</p>`; });
+  html += `
+    <a class="guide-card" href="${o.guide}" target="_blank" rel="noopener">
+      <span class="gk">Your free guide</span>
+      <span class="gt">${o.guideTitle}</span>
+      <span class="gs">Four pages, written to be useful wherever you end up going. Yours to keep.</span>
+    </a>
+    <div class="btn-row"><a class="btn" href="${BOOKING_URL}" target="_blank" rel="noopener">Book My Free 15 Minutes →</a></div>
+    <p class="cta-sub">Meet Dr. Mehta, see the practice. No treatment, no cost, no pressure.</p>
+    <p class="aspiration-line">${tokens(o.wantLine)}</p>
+    <div style="text-align:center"><button class="back-link" onclick="location.reload()">Retake the quiz</button></div>`;
+  screen.innerHTML = html;
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+renderWelcome();
+</script>
+</body>
+</html>
