@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>What Do You Actually Want From a Dentist? | Reflections Dental Group</title>
-<meta name="description" content="A free 60-second quiz from Reflections Dental in Calgary. Find out what you actually value in dental care, what to look for so you get it, and claim a free 15-minute visit to meet Dr. Mehta.">
+<meta name="description" content="A free 60-second quiz from Reflections Dental in Calgary. Find out what you actually value in dental care, what to look for so you get it, and claim a free 30-minute visit to meet Dr. Mehta.">
 <style>
   :root {
     --orange: #F26522;
@@ -243,7 +243,7 @@ const OUTCOMES = {
       "<strong>What to look for, wherever you go:</strong> ask how long a routine checkup and cleaning is booked for, and ask how many patients the dentist sees in a day. You will learn more from those two numbers than from any amount of website copy, including ours.",
       "<strong>Where we fit:</strong> two chairs sets a ceiling on how many people can be seen in a day, and Dr. Mehta chose that ceiling on purpose. The appointment where you come back and say \"this still does not feel right\" is a normal part of the process here rather than a favour."
     ],
-    wantLine: "You said what would help is {want}. Fifteen minutes is a reasonable way to test whether we actually work the way this page says we do." },
+    wantLine: "You said what would help is {want}. Thirty minutes is a reasonable way to test whether we actually work the way this page says we do." },
   S: { name: "The Straight Answer", slug: "straight-answer", guide: "guides/dentist-fit-straight-answer.pdf",
     guideTitle: "How to read a dental treatment plan",
     headline: "{first_name}, you want to be told the truth.",
@@ -263,7 +263,7 @@ const OUTCOMES = {
       "Your answers are clear. You want dental care that is convenient, affordable, and finished. You are not looking for a relationship with a dentist, you are looking for clean teeth and no surprises, and there is nothing wrong with that at all.",
       "<strong>The honest part:</strong> a larger clinic with extended hours, multiple dentists, and volume pricing may genuinely be the right answer for you, and we would rather say so. We are two chairs, appointments run longer, and we are not the cheapest option in Calgary. If price and convenience are your top two, you should weigh that seriously rather than have us talk you out of it.",
       "<strong>What is worth knowing anyway:</strong> the cheapest version of dental care is not always the least expensive over ten years, because the costs of rushed or repeated work arrive later and land as bigger treatment. That is not an argument for us specifically. It is an argument for weighing the whole decade rather than the invoice.",
-      "<strong>If you want to look anyway:</strong> the fifteen minutes is free and involves no treatment and no pressure. Plenty of people come, decide we are not their fit, and leave with a better question list for wherever they go instead. That is a fine outcome."
+      "<strong>If you want to look anyway:</strong> the thirty minutes is free and involves no treatment and no pressure. Plenty of people come, decide we are not their fit, and leave with a better question list for wherever they go instead. That is a fine outcome."
     ],
     wantLine: "You said what would help is {want}. Worth being honest that we optimise for a different thing." }
 };
@@ -276,7 +276,7 @@ function renderWelcome() {
   screen.innerHTML = `
     <h1>What do you actually want from a dentist?</h1>
     <p class="lede">Most people have never been asked. You pick a practice because it was close, or covered, or someone recommended it, and then you put up with whatever it turns out to be.</p>
-    <p class="lede">This free 60-second quiz sorts what you actually value in dental care, and tells you what to look for so you get it. Plus a short guide to keep, and a <strong>free 15-minute visit to meet Dr. Mehta</strong> if you want one.</p>
+    <p class="lede">This free 60-second quiz sorts what you actually value in dental care, and tells you what to look for so you get it. Plus a short guide to keep, and a <strong>free 30-minute visit to meet Dr. Mehta</strong> if you want one.</p>
     <div class="btn-row"><button class="btn" onclick="next()">Start the Quiz →</button></div>`;
 }
 
@@ -360,7 +360,7 @@ function renderLeadForm() {
   screen.innerHTML = `
     <h2>Your result is ready.</h2>
     <p>Enter your details to see what you value most in dental care, and the short guide that goes with it.</p>
-    <p>Everyone who takes the quiz can also claim a <strong>free 15-minute visit to meet Dr. Mehta and see the practice.</strong> No treatment, no examination, no cost. Just a look at the place and the person before you decide anything.</p>
+    <p>Everyone who takes the quiz can also claim a <strong>free 30-minute visit to meet Dr. Mehta and see the practice.</strong> No treatment, no examination, no cost. Just a look at the place and the person before you decide anything.</p>
     <label class="field">First name</label>
     <input type="text" id="lfName" value="${state.first_name.replace(/"/g, "&quot;")}">
     <label class="field">Email</label>
@@ -427,7 +427,7 @@ function renderResult(arch) {
       <span class="gt">${o.guideTitle}</span>
       <span class="gs">Four pages, written to be useful wherever you end up going. Yours to keep.</span>
     </a>
-    <div class="btn-row"><a class="btn" href="${BOOKING_URL}" target="_blank" rel="noopener">Book My Free 15 Minutes →</a></div>
+    <div class="btn-row"><a class="btn" href="${BOOKING_URL}" target="_blank" rel="noopener">Book My Free 30 Minutes →</a></div>
     <p class="cta-sub">Meet Dr. Mehta, see the practice. No treatment, no cost, no pressure.</p>
     <p class="aspiration-line">${tokens(o.wantLine)}</p>
     <div style="text-align:center"><button class="back-link" onclick="location.reload()">Retake the quiz</button></div>`;
